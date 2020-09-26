@@ -1,0 +1,90 @@
+<template>
+    <div>
+        <form class="form">
+        <h1>Регистрация</h1>
+        <div class="input-form">
+            <input name="firstName" placeholder="First name" type="text">
+        </div>
+        <div class="input-form">
+            <input name="lastName" placeholder="Last name" type="text">
+        </div>
+        <div class="input-form">
+            <input name="email" placeholder="email" type="email">
+        </div>
+        <div class="input-form">
+            <input name="pass" placeholder="password" type="password">
+        </div>
+
+        <div class="input-form">
+            <input type="submit">
+            <router-link to="/login"  class="btnLoguot">Вернуться к авторизации</router-link>
+        </div>
+    </form>
+    </div>
+</template>
+
+<style scoped>
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .7);
+}
+
+.form h1 {
+    margin: 30px 100px;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.input-form {
+    margin: 15px 40px;
+    text-align: center;
+}
+
+.input-form input {
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+    font-size: 20px;
+    background: none;
+    outline: none;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+
+.input-form input[type="text"]:focus, .input-form input[type="email"]:focus, .input-form input[type="password"]:focus {
+    border: 1px solid #0fc3f5;
+}
+
+.input-form input[type="submit"] {
+    margin-top: 20px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    background:  #0fc3f5;
+    transform: .3s;
+}
+
+.input-form input[type="submit"]:hover {
+    background: #4442db;
+}
+
+.form a {
+    display: block;
+    padding: 20px 10px 10px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.form a:hover {
+    color: #0fc3f5
+}
+</style>
