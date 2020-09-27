@@ -18,27 +18,45 @@
                 <table>
                     <tr>
                         <td>first name:</td>
-                        <td>name</td>
+                        <td></td>
                     </tr>
                      <tr>
                         <td>last name:</td>
-                        <td>surname</td>
+                        <td></td>
                     </tr>
                      <tr>
                         <td>email:</td>
-                        <td>email</td>
+                        <td>{{email}}</td>
                     </tr>
                 </table>
             </div>
 
             <div class="log-out">
-                <router-link to="/login" tag="button" class="btnLoguot">выйти</router-link>
+                <!-- <router-link to="/login" tag="button" class="btnLoguot">выйти</router-link> -->
+                <input class="btnLoguot" type="button" @click="logout" value="выйти">
             </div>
         </div>
     </div>
 </template>
 
-
+<script>
+export default {
+    data() {
+        return {
+            name: 'name',
+            email: localStorage.email
+        }
+    },
+     methods: {
+        logout() {
+            // localStorage.email = null
+            localStorage.removeItem('email')
+            // если полижительный ответ то переход ниже
+            this.$router.push('/login')
+        }
+    }    
+}
+</script>
 
 <style scoped>
 /* .personal-area {

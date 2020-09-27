@@ -3,14 +3,14 @@
         <form class="form">
         <h1>Вход</h1>
         <div class="input-form">
-            <input name="email" placeholder="email" type="email">
+            <input name="email" placeholder="email" type="email" v-model="email">
         </div>
         <div class="input-form">
-            <input name="pass" placeholder="password" type="password">
+            <input name="pass" placeholder="password" type="password" v-model="password">
         </div>
 
         <div class="input-form">
-            <input type="submit">
+            <input type="button" @click="auth" value="войти">
         </div>
 
         <!-- должна быть кнопка, но я сделаю ссылкой -->
@@ -19,6 +19,41 @@
     </form>
     </div>
 </template>
+
+<script>
+export default {
+   
+    data() {
+        return{
+            email: '',
+            password: ''
+        }
+    },
+    mounted() {
+
+    },
+    methods: {
+        auth() {
+            console.log(this.email, this.password);
+            // отправляем данные на сервер
+            // еслт получаем положительный ответ то записываем пользователя в локал сторедж
+            // иначе просим ввести данные зоново
+
+            // здесь нужно отправлять форму
+
+            // анализируем ответ 
+
+            if (this.email !== '' && this.password !== '') {
+                localStorage.email = this.email
+
+                // если полижительный ответ то переход ниже
+                console.log('переход');
+                this.$router.push('/')
+            }
+        }
+    }
+}
+</script>
 
 <style scoped>
 .body {
@@ -63,7 +98,7 @@
     border: 1px solid #0fc3f5;
 }
 
-.input-form input[type="submit"] {
+.input-form input[type="button"] {
     margin-top: 20px;
     color: #fff;
     font-weight: bold;
@@ -73,7 +108,7 @@
     transform: .3s;
 }
 
-.input-form input[type="submit"]:hover {
+.input-form input[type="button"]:hover {
     background: #4442db;
 }
 
