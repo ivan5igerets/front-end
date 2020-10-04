@@ -18,11 +18,11 @@
                 <table>
                     <tr>
                         <td>first name:</td>
-                        <td></td>
+                        <td>{{firstName}}</td>
                     </tr>
                      <tr>
                         <td>last name:</td>
-                        <td></td>
+                        <td>{{lastName}}</td>
                     </tr>
                      <tr>
                         <td>email:</td>
@@ -44,14 +44,18 @@ export default {
     data() {
         return {
             name: 'name',
-            email: localStorage.email
+            firstName: localStorage.getItem('firstName'),
+            lastName: localStorage.getItem('lastName'),
+            email: localStorage.getItem('email')
         }
     },
-     methods: {
+    methods: {
         logout() {
             // localStorage.email = null
+            localStorage.removeItem('firstName')
+            localStorage.removeItem('lastName')
             localStorage.removeItem('email')
-            // если полижительный ответ то переход ниже
+
             this.$router.push('/login')
         }
     }    
@@ -71,6 +75,8 @@ export default {
     border-radius: 5px;
     margin: 10px auto;
     padding: 20px 15px;
+    font-size: 18px; 
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 input::placeholder {

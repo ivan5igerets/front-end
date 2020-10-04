@@ -8,7 +8,7 @@
       v-bind:notations="notations"
     />
 
-    <Navigation />
+    <!-- <Navigation /> -->
   </div>
 </template>
 
@@ -28,7 +28,9 @@ export default {
         }
     },
     mounted() {
-        fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        fetch('http://127.0.0.1:8080/',{
+          method: 'POST'
+        })
         .then(response => response.json())
         .then(json => {
             this.notations = json

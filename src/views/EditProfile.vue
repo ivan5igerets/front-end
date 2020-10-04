@@ -1,31 +1,34 @@
 <template>
         <div class="notation">
-            <form class="form">
+            <form 
+                ref="form"
+                class="form"
+            >
                 <h1 style="margin: 15px">Редактировать</h1>
 
                 <div class="input-form">
                     <!-- <input name="firstName" placeholder="First name" type="text" > -->
-                    <input name="firstName" placeholder="First name" type="text" v-model="usersInfo[0].title">
+                    <input name="firstName" placeholder="First name" type="text" v-model="firstName">
                 </div>
 
                 <div class="input-form">
                     <!-- <input name="firstName" placeholder="First name" type="text" > -->
-                    <input name="lastName" placeholder="Last name" type="text" v-model="usersInfo[1].title">
+                    <input name="lastName" placeholder="Last name" type="text" v-model="lastName">
                 </div>
 
                 <div class="input-form">
                     <!-- <input name="firstName" placeholder="First name" type="text" > -->
-                    <input name="email" placeholder="email" type="email" v-model="usersInfo[2].title">
+                    <input name="email" placeholder="email" type="email" v-model="email">
                 </div>
 
-                <div class="input-form">
-                    <!-- <input name="firstName" placeholder="First name" type="text" > -->
-                    <input name="pass" placeholder="password" type="password" v-model="usersInfo[3].title">
-                </div>
+                <!-- <div class="input-form">
+                    <input name="firstName" placeholder="First name" type="text" >
+                    <input name="pass" placeholder="password" type="password" >
+                </div> -->
 
                 <div class="input-form form-buttom">
                     <router-link to="/personal_area" tag="button" class="btnBack">назад</router-link>
-                    <input type="submit">
+                    <input type="button" value="отправить" @click="sendingData">
                 </div>
             </form>
         </div>
@@ -35,16 +38,44 @@
 export default {
     data() {
         return {
-            usersInfo: []
+            // id: localStorage
+            firstName: localStorage.getItem('firstName'),
+            lastName: localStorage.getItem('lastName'),
+            email: localStorage.getItem('email'),
         }
     },
-    beforeCreate() {
-        fetch('https://jsonplaceholder.typicode.com/todos?_limit=4')
-        .then(response => response.json())
-        .then(json => {
-            this.usersInfo = json
-            this.loading = false 
-        })
+    methods: {
+        async sendingData() {
+            try {
+                const form = this.$refs.form
+                let formData = new FormData(form)
+
+                formData.append('id', localStorage.getItem('id'))
+
+                const url = 'http://localhost:8080/edit_user_profile'
+                const responce = await fetch(url, {
+                    method: "POST",
+                    body: formData
+                    });
+
+                const data = await responce.json()
+				console.log('Data:', data);
+        
+                if(data === true) {
+                    localStorage.setItem('firstName', this.firstName)
+                    localStorage.setItem('lastName', this.lastName)
+                    localStorage.setItem('email', this.email)
+                    this.$router.push('/personal_area');
+                } else {
+                    alert('что-то пошло не так')
+                }
+
+            } catch (e) {
+                console.error(e);
+                alert('что-то пошло не так')
+
+            }
+		}
     }
 }
 </script>
@@ -57,6 +88,7 @@ export default {
     border-radius: 5px;
     margin: 10px auto;
     padding: 20px 15px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 input::placeholder {
@@ -82,6 +114,8 @@ input[type="text"] {
    color: black;  
    /* font-size: 11px;  */
    /* font-family: Tahoma;  */
+   font-family: Arial; 
+   font-size: 14px;
 }
 
 input[type="email"] {
@@ -95,8 +129,8 @@ input[type="email"] {
    height: 30px; 
    width: 570px; 
    color: black;  
-   /* font-size: 11px;  */
-   /* font-family: Tahoma;  */
+   font-family: Arial; 
+    font-size: 14px;
 }
 
 input[type="password"] {
@@ -119,7 +153,7 @@ input[type="password"] {
     text-align: center;
 }
 
-.input-form input[type="submit"] {
+.input-form input[type="button"] {
     margin-top: 20px;
     color: #fff;
     font-weight: bold;

@@ -1,27 +1,92 @@
 <template>
     <div>
-        <form class="form">
+        <form
+         id="form"
+         ref="form"
+         class="form" 
+         >
         <h1>Регистрация</h1>
         <div class="input-form">
-            <input name="firstName" placeholder="First name" type="text">
+            <input name="firstName" placeholder="First name" type="text" v-model="firstName">
         </div>
         <div class="input-form">
-            <input name="lastName" placeholder="Last name" type="text">
+            <input name="lastName" placeholder="Last name" type="text" v-model="lastName">
         </div>
         <div class="input-form">
-            <input name="email" placeholder="email" type="email">
+            <input name="email" placeholder="email" type="email" v-model="email">
         </div>
         <div class="input-form">
-            <input name="pass" placeholder="password" type="password">
+            <input name="pass" placeholder="password" type="password" v-model="password">
         </div>
 
         <div class="input-form">
-            <input type="submit">
+            <input type="button" @click="auth" value="регистрация" />
             <router-link to="/login"  class="btnLoguot">Вернуться к авторизации</router-link>
         </div>
     </form>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+		return {
+            firstName: '',
+            lastName: '',
+			email: '',
+			password: ''
+		};
+	},
+	mounted() {},
+	methods: {
+		auth() {
+			if (this.fieldValidation()) {
+                this.signUp()
+			}else {
+				alert('Проверьте введённые данные, не должно быть пустых полей')
+			}
+		},
+		fieldValidation() {
+            if (this.firstName == '' || this.lastName == ''
+                    || this.email.length < 6 || this.password.length < 6) {
+				return false
+			} else {
+				return true
+			}
+        },
+        async signUp() {
+            try {
+                const url = 'http://localhost:8080/signup'
+                const form = this.$refs.form
+                const responce = await fetch(url, {
+                    method: "POST",
+                    body: new FormData(form)
+                    });
+
+                const data = await responce.json()
+                // console.log('Data:', data);
+                
+                if(data !== null) {
+                    console.log(data);
+                    localStorage.setItem('id', data)
+                    localStorage.setItem('firstName', this.firstName);
+                    localStorage.setItem('lastName', this.lastName);
+                    localStorage.setItem('email', this.email);
+
+				    console.log('переход');
+				    this.$router.push('/');
+                } else {
+                    alert('что-то пошло не так')
+                }
+            } catch (e) {
+                console.error(e);
+                alert('что-то пошло не так')
+
+            }
+        }
+    }
+}
+</script>
 
 <style scoped>
 .form {
@@ -61,7 +126,7 @@
     border: 1px solid #0fc3f5;
 }
 
-.input-form input[type="submit"] {
+.input-form input[type="button"] {
     margin-top: 20px;
     color: #fff;
     font-weight: bold;
@@ -71,7 +136,7 @@
     transform: .3s;
 }
 
-.input-form input[type="submit"]:hover {
+.input-form input[type="button"]:hover {
     background: #4442db;
 }
 

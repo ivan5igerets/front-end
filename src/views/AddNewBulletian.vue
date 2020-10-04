@@ -2,7 +2,10 @@
     <div class="background">
 
         <div class="notation">
-            <form class="form">
+            <form 
+                class="form"
+                ref="form"
+            >
                 <h1 style="margin: 15px">Добавить объявление</h1>
 
                 <div class="input-form">
@@ -15,18 +18,58 @@
 
                 <div class="input-form form-buttom">
                     <router-link to="/personal_area" tag="button" class="btnBack">назад</router-link>
-                    <input type="submit">
+                    <input type="button" @click="addNewBulletin" value="отправить">
                 </div>
             </form>
         </div>
     </div>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+        }
+    },
+    methods: {
+        async addNewBulletin() {
+            try {
+                const form = this.$refs.form
+                let formData = new FormData(form)
+
+                formData.append('firstName',localStorage.getItem('firstName'))
+                formData.append('lastName',localStorage.getItem('lastName'))
+                
+                const url = 'http://localhost:8080/add_new_bulletin'
+                const responce = await fetch(url, {
+                    method: "POST",
+                    body: formData
+                    });
+
+                const data = await responce.json()
+                console.log('Data:', data);
+
+                if(data === true) {
+                    this.$router.push('/');
+                } else {
+                    alert('что-то пошло не так')
+                }
+                
+            } catch (e) {
+				console.error(e);
+                alert('что-то пошло не так')
+
+            }
+		}
+    }
+}
+</script>
+
 <style scoped>
 .background {
-    background: burlywood; 
+    /* background: burlywood;  */
     padding: 5px;
-    min-height: 650px;
+    /* min-height: 650px; */
 }
 
 .notation{
@@ -36,6 +79,7 @@
     border-radius: 5px;
     margin: 10px auto;
     padding: 20px 15px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 input::placeholder {
@@ -59,8 +103,8 @@ input[type="text"] {
    height: 30px; 
    width: 570px; 
    color: black;  
-   /* font-size: 11px;  */
-   /* font-family: Tahoma;  */
+   font-family: Arial; 
+   font-size: 14px;
 }
 
 textarea {
@@ -73,7 +117,11 @@ textarea {
    outline: none; 
    height: 120px; 
    width: 570px; 
-   color: black;  
+   color: black; 
+   /* font-family: Helvenica;  */
+   font-family: Arial; 
+   font-size: 14px;
+
 }
 
 .input-form {
@@ -81,7 +129,7 @@ textarea {
     /* text-align: center; */
 }
 
-.input-form input[type="submit"] {
+.input-form input[type="button"] {
     margin-top: 20px;
     color: #fff;
     font-weight: bold;
