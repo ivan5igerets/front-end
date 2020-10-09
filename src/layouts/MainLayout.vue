@@ -16,10 +16,9 @@ export default {
 
 <style scoped>
 .main {
-    width: 100%;
-    /* background-color:rgba(156, 148, 133, 0.308); */
+    height: 100%;
     background:#e8e8e8;
-    min-height: 725px;
-    padding-bottom: 5px;
+    min-height: 100vh;
+    /* padding-bottom: 1px; */
 }
 </style>

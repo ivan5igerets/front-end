@@ -42,13 +42,18 @@ export default {
 		auth() {
 			if (this.fieldValidation()) {
                 this.signUp()
-			}else {
-				alert('Проверьте введённые данные, не должно быть пустых полей')
 			}
 		},
 		fieldValidation() {
             if (this.firstName == '' || this.lastName == ''
-                    || this.email.length < 6 || this.password.length < 6) {
+                || this.email == '' || this.password == '') {
+				alert('все поля должны быть заполнены')
+				return false
+			} else if (this.email.length < 8) {
+				alert('поле \'email\' должно содержать не меньше 8-ми символов')
+				return false
+			} else if (this.password.length < 6) {
+				alert('поле \'password\' должно содержать не меньше 6-ми символов')
 				return false
 			} else {
 				return true

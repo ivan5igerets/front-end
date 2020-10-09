@@ -177,6 +177,7 @@ input[type="password"] {
     padding: 10px 20px;
 }
 
+
 .form-buttom {
     display: flex;
     justify-content: space-between;

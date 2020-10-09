@@ -9,11 +9,11 @@
                 <h1 style="margin: 15px">Добавить объявление</h1>
 
                 <div class="input-form">
-                    <input name="title" placeholder="Заголовок" type="text">
+                    <input name="title" placeholder="Заголовок" type="text" v-model="title">
                 </div>
 
                 <div class="input-form">
-                    <textarea name="body" id="" cols="10" rows="10"></textarea>
+                    <textarea name="body" id="" cols="10" rows="10" v-model="body"></textarea>
                 </div>
 
                 <div class="input-form form-buttom">
@@ -29,10 +29,18 @@
 export default {
     data() {
         return {
+            title: '',
+            body: ''
         }
     },
     methods: {
         async addNewBulletin() {
+
+            if (this.title.length == 0 || this.body.length == 0) {
+                alert('Все поля должны быть заполнены')
+                return
+            }
+
             try {
                 const form = this.$refs.form
                 let formData = new FormData(form)
