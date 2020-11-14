@@ -31,4 +31,14 @@ The given application includes:
 
 The client part is written in the JavaScript framework Vue.js.
 
+![](https://github.com/ivan5igerets/back-end/raw/master/img/checkIn.png)   
+
 ![](https://github.com/ivan5igerets/back-end/raw/master/img/logIn.png)
+
+![](https://github.com/ivan5igerets/back-end/raw/master/img/newsFeed.png)
+
+![](https://github.com/ivan5igerets/back-end/raw/master/img/personalArea.png)
+
+![](https://github.com/ivan5igerets/back-end/raw/master/img/editUsersInfo.png)
+
+![](https://github.com/ivan5igerets/back-end/raw/master/img/addNewBulletin.png)
