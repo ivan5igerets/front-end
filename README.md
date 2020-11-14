@@ -28,5 +28,6 @@ The given application includes:
 * authorization and registration;
 * secure routes (an unauthorized user cannot view the ad feed, he/she goes to the authorization page);
 * two different layouts are used.  
-
 The client part is written in the JavaScript framework Vue.js.
+
+
