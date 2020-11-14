@@ -31,5 +31,4 @@ The given application includes:
 
 The client part is written in the JavaScript framework Vue.js.
 
-
-![Альтернативный текст](https://www.google.com/url?sa=i&url=https%3A%2F%2Fproprikol.ru%2Fkartinki%2Fsinij-czvet-krasivye-kartinki-60-foto.html&psig=AOvVaw0C8cL5IGZ7ittE1LvV42JH&ust=1605442598743000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCymrD0ge0CFQAAAAAdAAAAABAD)
+![](https://github.com/ivan5igerets/back-end/raw/master/img/logIn.png)
